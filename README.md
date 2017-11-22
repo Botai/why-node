@@ -48,3 +48,17 @@
         ```bash
         node --inspect-brk _debug.js
         ```
+
+### [path](./path)
+* normalize 把路径改为标准格式
+* join 无论是否加斜线，拼接成标准路径
+* resolve 相对路径解析为绝对路径
+* basename 文件名
+* dirname 所在文件夹名字
+* extname 文件拓展名
+* parse 分析一个路径,得到路径的对象
+* format 与 parse 相反，得到字符串
+* 小结:
+    * __dirname, __filename 总是返回文件的绝对路径
+    * process.cwd() 总是返回执行 node 命令所在的文件夹
+    * ./  在 require 方法中总是相对当前文件所在的文件夹, 在其他地方和 process.cwd() 一样，相对 node 启动文件夹
