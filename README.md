@@ -107,3 +107,9 @@
     * buf.copy()
 
 ### [events](./events)
+* [传送门](http://nodejs.cn/api/events.html)
+
+### [fs](./fs) 
+* [传送门](http://nodejs.cn/api/fs.html)
+* 回调函数的第一个参数都会保留给异常
+* promise & async await
