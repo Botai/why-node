@@ -105,3 +105,5 @@
     * buf.equals()
     * buf.indexOf()
     * buf.copy()
+
+### [events](./events)
