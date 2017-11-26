@@ -2,23 +2,23 @@
 
 > 一切内容基于[官网api](http://nodejs.cn/api/)
 
-### [require 特性](./require)
+### [require 特性](./api/require)
 
 * module 被加载的时候执行， 加载后缓存
 * 一旦出现某个模块循环加载，就只输出已经执行的部分，还未执行的部分不会输出
 * 尽量避免...
 
-### [exports 与 module.exports](./exports)
+### [exports 与 module.exports](./api/exports)
 
 * 查看代码...
 
-### [global](./global)
+### [global](./api/global)
 
 * CommonJS
 * Buffer, process, console
 * timer
 
-### [node 的 debug](./debug)
+### [node 的 debug](./api/debug)
 * [Inspector](https://nodejs.org/en/docs/inspector/)
 * VS Code
     * 配置如下(看个人喜好)
@@ -51,7 +51,7 @@
         node --inspect-brk _debug.js
         ```
 
-### [path](./path)
+### [path](./api/path)
 
 * normalize 把路径改为标准格式
 * join 无论是否加斜线，拼接成标准路径
@@ -66,7 +66,7 @@
     * process.cwd() 总是返回执行 node 命令所在的文件夹
     * ./  在 require 方法中总是相对当前文件所在的文件夹, 在其他地方和 process.cwd() 一样，相对 node 启动文件夹
 
-### [buffer](./buffer)
+### [buffer](./api/buffer)
 
 * Buffer 用于处理二进制数据流，实例类似整数数组，大小固定，由 c++ 大代码在 v8 堆外分配物理内存
 * 例子：
@@ -106,4 +106,10 @@
     * buf.indexOf()
     * buf.copy()
 
-### [events](./events)
+### [events](./api/events)
+* [传送门](http://nodejs.cn/api/events.html)
+
+### [fs](./api/fs) 
+* [传送门](http://nodejs.cn/api/fs.html)
+* 回调函数的第一个参数都会保留给异常
+* promise & async await
