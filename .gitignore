@@ -1,4 +1,7 @@
 screeshot/*.png
+mn/*.png
+mn/*.jpg
+mn/*.gif
 
 .DS_Store
 node_modules/
