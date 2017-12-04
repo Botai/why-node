@@ -28,14 +28,25 @@ console.log(str_arguments);
 
         const names = await page.evaluate(() => {
             const texts = document.querySelectorAll('a.opac_blue')
-            return Array.prototype.map.call(texts, data => data.text)
+            return Array.prototype.map.call(texts, data => {
+                return text = {
+                    name: data.text,
+                    href: data.href
+                };
+
+            })
         });
 
         console.log('success!!');
         console.log("---------------------");
         names.forEach(async(text) => {
-            if (text !== ' 查看索书号' && text !== '全选' && text !== '取消') {
-                console.log(text);
+            if (text.name !== ' 查看索书号' && text.name !== '全选' && text.name !== '取消') {
+                console.log(text.name);
+                var changeHref = text.href;
+                changeHref = changeHref.slice('32').replace(/\'|,|\(|\)/g, "");
+                changeHref = 'http://reader.library.neusoft.edu.cn/book/detailBook.jsp?rec_ctrl_id=' + changeHref
+                console.log(changeHref);
+
             }
         })
         console.log("---------------------");
