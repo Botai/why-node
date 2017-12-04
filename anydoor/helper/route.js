@@ -5,6 +5,9 @@ const promisify = require('util').promisify
 const stat = promisify(fs.stat)
 const readdir = promisify(fs.readdir)
 const config = require('../config/defaultConfig')
+const mime = require('../helper/mime')
+const compress = require('./compress')
+
 
 const tplpath = path.join(__dirname, '../template/dir.tpl')
     // 只执行一次
@@ -16,10 +19,16 @@ module.exports = async function(req, res, filePath) {
         const stats = await stat(filePath)
 
         if (stats.isFile()) {
+            const contentType = mime(filePath)
             res.statusCode = 200;
-            res.setHeader('content-Type', 'text/plain')
+            res.setHeader('content-Type', contentType)
                 // 流的方式读写快
-            fs.createReadStream(filePath).pipe(res)
+            let rs = fs.createReadStream(filePath)
+            if (filePath.match(config.compress)) {
+                console.log('压缩');
+                rs = compress(rs, req, res)
+            }
+            rs.pipe(res)
         } else if (stats.isDirectory()) {
             const files = await readdir(filePath)
             res.statusCode = 200;
@@ -29,7 +38,12 @@ module.exports = async function(req, res, filePath) {
                 title: path.basename(filePath),
                 // 相对于 root 的路径
                 dir: dir ? `/${dir}` : '',
-                files
+                files: files.map(file => {
+                    return {
+                        file,
+                        icon: mime(file)
+                    }
+                })
             }
             res.end(template(data))
         }
